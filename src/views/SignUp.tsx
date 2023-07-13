@@ -3,6 +3,7 @@ import {View, Text, Button} from 'react-native';
 
 export const SignUp = ({ navigation }) => {
 
+
   return (
     <View>
       <Text>Sign Up screen here</Text>

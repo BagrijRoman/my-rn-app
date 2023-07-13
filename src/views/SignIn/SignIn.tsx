@@ -1,10 +1,12 @@
 import React, { useState, useCallback } from 'react';
-import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 
-import { TextInput } from '../../components';
+import { TextInput, Button  } from '../../components';
 
+import { Notificator } from '../../helpers/Notificator';
 import { validateEmail } from '../../utils';
 import { colors } from '../../styles/colors';
+
 
 
 const styles = StyleSheet.create({
@@ -21,12 +23,6 @@ const styles = StyleSheet.create({
   btnContainer: {
     alignItems: "center",
   },
-  button: {
-    borderRadius: 8,
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-    alignItems: "center",
-  },
 });
 
 // todo input and button as a separate components
@@ -40,10 +36,12 @@ export const SignIn = ({ navigation }) => {
     console.log('email : ', email);
     console.log(validateEmail(email));
 
-    if (validateEmail(email)) {
-
+    if (!email) {
+      Notificator.error('Email is required');
+    } else if (!validateEmail(email)) {
+      Notificator.error('Invalid email provided');
     } else if (password.length <=5) {
-
+      Notificator.error('Password is too short');
     }
 
     console.log('email ', email);
@@ -65,14 +63,13 @@ export const SignIn = ({ navigation }) => {
           placeholder="Password"
           secureTextEntry={true}
         />
-        <TouchableOpacity
+        <Button
           onPress={onLogInClick}
-          style={styles.button}
         >
           <Text>
             Log In
           </Text>
-        </TouchableOpacity>
+        </Button>
       </View>
     </View>
   );
