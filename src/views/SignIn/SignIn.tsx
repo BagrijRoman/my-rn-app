@@ -6,7 +6,7 @@ import { TextInput, Button  } from '../../components';
 import { Notificator } from '../../helpers/Notificator';
 import { validateEmail } from '../../utils';
 import { colors } from '../../styles/colors';
-
+import { loginAction } from '../../redux/User/actions'
 
 
 const styles = StyleSheet.create({
@@ -44,8 +44,12 @@ export const SignIn = ({ navigation }) => {
       Notificator.error('Password is too short');
     }
 
+
+
     console.log('email ', email);
     console.log('password ', password);
+
+    loginAction({ email, password });
   }, [email, password]);
 
 
