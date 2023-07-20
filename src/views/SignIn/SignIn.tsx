@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import {View, StyleSheet, Text} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux'
 
 import { TextInput, Button  } from '../../components';
 
@@ -28,30 +29,22 @@ const styles = StyleSheet.create({
 // todo input and button as a separate components
 
 export const SignIn = ({ navigation }) => {
-  const [ email, setEmail ]  = useState('');
-  const [ password, setPassword] = useState('');
+  const [email, setEmail]  = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const { loading, loggedIn } = useSelector(({ user }) => user);
 
   const onLogInClick = useCallback(() => {
-
-    console.log('email : ', email);
-    console.log(validateEmail(email));
-
     if (!email) {
       Notificator.error('Email is required');
     } else if (!validateEmail(email)) {
       Notificator.error('Invalid email provided');
     } else if (password.length <=5) {
       Notificator.error('Password is too short');
+    } else {
+      dispatch(loginAction({ email, password }));
     }
-
-
-
-    console.log('email ', email);
-    console.log('password ', password);
-
-    loginAction({ email, password });
   }, [email, password]);
-
 
   return (
     <View style={styles.rootContainer}>
@@ -69,11 +62,9 @@ export const SignIn = ({ navigation }) => {
         />
         <Button
           onPress={onLogInClick}
-        >
-          <Text>
-            Log In
-          </Text>
-        </Button>
+          text="Log In"
+          loading={loading}
+        />
       </View>
     </View>
   );

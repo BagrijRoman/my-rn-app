@@ -1,6 +1,6 @@
 import { ReactChild, ReactFragment, ReactPortal } from "@types/react";
 import React from 'react';
-import { Text, TouchableOpacity } from "react-native";
+import {Text, TouchableOpacity, ActivityIndicator, View, StyleSheet} from "react-native";
 
 import { colors } from "../styles/colors";
 
@@ -17,13 +17,32 @@ interface BtnProps {
   style: Object,
   text: string,
   disabled: boolean,
+  loading: boolean,
   children: ReactChild | ReactFragment | ReactPortal | boolean | null | undefined;
 }
+
+const styles = StyleSheet.create({
+  container: {
+    // flex: 3,
+    // flexDirection: "row",
+    // alignItems: "center",
+    // justifyContent: "center",
+  },
+  loadingContainer: {
+    flexDirection: "row",
+  },
+  loader: {
+    marginRight: 10,
+  },
+});
 
 const btnDefaultStyles = {
   borderRadius: 8,
   backgroundColor: '#DDDDDD',
   padding: 10,
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-evenly",
   alignItems: "center",
 };
 
@@ -55,6 +74,7 @@ export const Button = (props: BtnProps) => {
     disabled = false,
     style = {},
     children = null,
+    loading = false,
     ...rest
   } = props;
 
@@ -81,18 +101,24 @@ export const Button = (props: BtnProps) => {
   }
 
   return (
-    <TouchableOpacity
-      {...{
-        onPress,
-        style: stylesUpdated,
-        ...rest
-      }}
-    >
-      {children ? children :
-        <Text>
-          {text}
-        </Text>
-      }
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <TouchableOpacity
+        {...{
+          onPress,
+          style: stylesUpdated,
+          disabled: disabled || loading,
+          ...rest
+        }}
+      >
+        {children ? children :
+          <View style={styles.loadingContainer}>
+            {loading && <ActivityIndicator  style={styles.loader} size="small" color="yellow" />}
+            <Text>
+              {text}
+            </Text>
+          </View>
+        }
+      </TouchableOpacity>
+    </View>
   );
 }
