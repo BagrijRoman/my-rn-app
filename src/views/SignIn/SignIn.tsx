@@ -1,32 +1,12 @@
 import React, { useState, useCallback } from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 
 import { TextInput, Button  } from '../../components';
-
 import { Notificator } from '../../helpers/Notificator';
 import { validateEmail } from '../../utils';
-import { colors } from '../../styles/colors';
-import { loginAction } from '../../redux/User/actions'
-
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    backgroundColor: colors.rootPageBackGround,
-  },
-  formContainer: {
-    width: 300,
-    alignItems: "stretch",
-  },
-  btnContainer: {
-    alignItems: "center",
-  },
-});
-
-// todo input and button as a separate components
+import { loginAction } from '../../redux/User/actions';
+import { styles } from './SIgnInStyles';
 
 export const SignIn = ({ navigation }) => {
   const [email, setEmail]  = useState('');
@@ -69,4 +49,3 @@ export const SignIn = ({ navigation }) => {
     </View>
   );
 }
-

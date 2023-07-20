@@ -23,5 +23,8 @@ export const RootRoutes = () => (
       component={Dashboard}
       options={{ title: 'Dashboard' }}
     />
+
+
+
   </Stack.Navigator>
 );
