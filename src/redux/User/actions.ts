@@ -1,5 +1,7 @@
 import { LOGIN, LOGOUT, LOGIN_SET_LOADING } from './actionTypes';
 import { TDispatch } from '../store';
+import { api } from '../../helpers/api';
+import { API_ROUTES, API_STATUS_CODES } from '../../constants';
 
 type TLoginData = {
   email: string,
@@ -14,16 +16,45 @@ export const setLoginLoading = (loadingFlag: boolean) => ({
 export const loginAction = (loginData: TLoginData) => async (dispatch: TDispatch) => {
   dispatch(setLoginLoading(true));
 
+  const { email, password } = loginData;
 
-  console.log('!!!!loginAction ', loginData);
+  try {
+    const { data, status } = await api.post(
+      API_ROUTES.login,
+      { email, password }
+    );
 
-  const userData = {};
+    console.log('response data ', data);
+    console.log('status ', status);
 
-  // set loading false
-  dispatch({
-    type: LOGIN,
-    payload: userData,
-  });
+
+    if (status === API_STATUS_CODES.OK) {
+      return dispatch({
+        type: LOGIN,
+        payload: data,
+      })
+    }
+
+    // todo handle different statuses
+
+
+
+
+
+
+    // const userData = {};
+    //
+    // // set loading false
+    // dispatch({
+    //   type: LOGIN,
+    //   payload: userData,
+    // });
+  } catch (err) {
+    console.log('error 1 ', err.toString());
+
+    dispatch(setLoginLoading(false));
+    // todo handle error with alert
+  }
 };
 
 
