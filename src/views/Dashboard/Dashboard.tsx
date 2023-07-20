@@ -9,12 +9,8 @@ export const Dashboard = ({ navigation }) => {
       <Text>Dashboard screen here</Text>
 
       <Button
-        title="Sign up"
+        title="Log out"
         onPress={() => navigation.navigate('SignUp')}
-      />
-      <Button
-        title="Sign in"
-        onPress={() => navigation.navigate('SignIn')}
       />
     </View>
   );

@@ -7,6 +7,8 @@ import {
 export const USER_INITIAL_STATE = {
   user: null,
   loading: false,
+  accessToken: null,
+  refreshToken: null,
 };
 
 export const userReducer = (state = USER_INITIAL_STATE, action) => {

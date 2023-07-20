@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {View} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -6,13 +6,19 @@ import { TextInput, Button  } from '../../components';
 import { Notificator } from '../../helpers/Notificator';
 import { validateEmail } from '../../utils';
 import { loginAction } from '../../redux/User/actions';
-import { styles } from './SIgnInStyles';
+import { styles } from './sIgnInStyles';
 
 export const SignIn = ({ navigation }) => {
   const [email, setEmail]  = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const { loading, loggedIn } = useSelector(({ user }) => user);
+  const { loading, user } = useSelector(({ user }) => user);
+
+  useEffect(() => {
+    if (user) {
+      navigation.navigate('Dashboard');
+    }
+  }, [user]);
 
   const onLogInClick = useCallback(() => {
     if (!email) {
