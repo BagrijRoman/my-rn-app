@@ -1,12 +1,12 @@
 import React from 'react';
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from "react-redux";
 
 import { SignIn, SignUp, Dashboard } from '../views';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
-export const RootRoutes = () => {
+export const RootNavigator = () => {
     const { user } = useSelector(({ user }) => user);
 
     return (
@@ -28,7 +28,7 @@ export const RootRoutes = () => {
           component={Dashboard}
           options={{
             title: 'Dashboard',
-            headerLeft: null,
+            headerLeft: () => null,
           }}
         />
       </Stack.Navigator>
