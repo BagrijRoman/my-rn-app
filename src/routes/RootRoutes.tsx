@@ -11,26 +11,25 @@ export const RootRoutes = () => {
 
     return (
       <Stack.Navigator initialRouteName={user ? 'Dashboard' : 'SignIn'}>
-        {
-          !user && (
-            [
-              <Stack.Screen
-                name="SignIn"
-                component={SignIn}
-                options={{ title: 'Sign In' }}
-              />,
-              <Stack.Screen
-                name="SignUp"
-                component={SignUp}
-                options={{ title: 'Sign Up' }}
-              />,
-            ]
-          )
-        }
+        <Stack.Screen
+          key="SignIn"
+          name="SignIn"
+          component={SignIn}
+          options={{ title: 'Sign In' }}
+        />
+        <Stack.Screen
+          key="SignUp"
+          name="SignUp"
+          component={SignUp}
+          options={{ title: 'Sign Up' }}
+        />
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
-          options={{ title: 'Dashboard' }}
+          options={{
+            title: 'Dashboard',
+            headerLeft: null,
+          }}
         />
       </Stack.Navigator>
     );

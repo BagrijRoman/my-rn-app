@@ -37,18 +37,6 @@ export const loginAction = (loginData: TLoginData) => async (dispatch: TDispatch
 
     // todo handle different statuses
 
-
-
-
-
-
-    // const userData = {};
-    //
-    // // set loading false
-    // dispatch({
-    //   type: LOGIN,
-    //   payload: userData,
-    // });
   } catch (err) {
     console.log('error 1 ', err.toString());
 
@@ -58,5 +46,8 @@ export const loginAction = (loginData: TLoginData) => async (dispatch: TDispatch
 };
 
 
-export const logoutData = () => ({ type: LOGOUT });
+export const logout = () => (dispatch: TDispatch) => {
+
+  return ({ type: LOGOUT });
+}
 

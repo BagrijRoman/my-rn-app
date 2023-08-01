@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {View, Text, Button} from 'react-native';
+import {useDispatch} from "react-redux";
+
+import { logout as logoutAction } from '../../redux/User/actions';
 
 export const Dashboard = ({ navigation }) => {
+  const dispatch = useDispatch();
 
+  const logout = useCallback(() => {
+    dispatch(logoutAction());
+    navigation.navigate('SignIn');
+  }, []);
 
   return (
     <View>
@@ -10,7 +18,7 @@ export const Dashboard = ({ navigation }) => {
 
       <Button
         title="Log out"
-        onPress={() => navigation.navigate('SignUp')}
+        onPress={logout}
       />
     </View>
   );
