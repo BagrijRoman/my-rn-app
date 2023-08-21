@@ -78,7 +78,7 @@ export const Button = (props: BtnProps) => {
     ...rest
   } = props;
 
-  const stylesUpdated = style;
+  const stylesUpdated = {};
 
   switch (type) {
     case btnType.primary: {
@@ -97,7 +97,6 @@ export const Button = (props: BtnProps) => {
     default: {
       Object.assign(stylesUpdated, btnSecondaryStyles);
     }
-
   }
 
   return (
@@ -105,7 +104,7 @@ export const Button = (props: BtnProps) => {
       <TouchableOpacity
         {...{
           onPress,
-          style: stylesUpdated,
+          style: [style, stylesUpdated],
           disabled: disabled || loading,
           ...rest
         }}
