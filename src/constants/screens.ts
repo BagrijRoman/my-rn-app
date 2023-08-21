@@ -4,4 +4,5 @@ export const screens = {
   DASHBOARD: 'Dashboard',
   SIGN_IN: 'SignIn',
   SIGN_UP: 'SignUp',
+  FORGOT_PASSWORD: 'ForgotPassword',
 } as const;

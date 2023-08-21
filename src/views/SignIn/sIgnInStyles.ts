@@ -15,4 +15,14 @@ export const styles = StyleSheet.create({
   btnContainer: {
     alignItems: "center",
   },
+  loginBtn: {
+    marginBottom: 5,
+  },
+  clickableTextContainer: {
+    alignItems: "center",
+  },
+  clickableText: {
+    marginTop: 10,
+    color: '#0044CC',
+  }
 });
