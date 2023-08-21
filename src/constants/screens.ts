@@ -3,4 +3,5 @@ export const screens = {
   APP_NAVIGATOR: 'AppNavigator',
   DASHBOARD: 'Dashboard',
   SIGN_IN: 'SignIn',
+  SIGN_UP: 'SignUp',
 } as const;

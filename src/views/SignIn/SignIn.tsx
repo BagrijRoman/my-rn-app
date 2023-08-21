@@ -51,6 +51,8 @@ export const SignIn = ({ navigation }) => {
           text="Log In"
           loading={loading}
         />
+
+
       </View>
     </View>
   );
